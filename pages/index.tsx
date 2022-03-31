@@ -1,9 +1,29 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRef } from 'react'
+import Web3 from 'web3'
+import { changeStateInput } from '../abi/abis'
+
+//Truffle outputs post-migrations process
+// const web3 = new Web3(Web3.givenProvider)
+// const contractAddr = '0x0'
+// const ChangeState = new web3.eth.Contract(changeStateInput, contractAddr)
 
 const Home: NextPage = () => {
   const inputRef = useRef<HTMLInputElement | null>(null)
+
+  // check if a web3 instance is running on port:9545
+  const web3Check = new Web3()
+  web3Check.setProvider(
+    new Web3.providers.WebsocketProvider('ws://localhost:9545')
+  )
+  web3Check.eth.net
+    .isListening()
+    .then(() => console.log('connection is successful!'))
+    .catch((e) => console.error('Something went wrong : ', e))
+  // read: and get data from our local blockchain
+
+  // write: send data to our local blockchain
 
   const handleSetBlockchainState = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
