@@ -35,7 +35,38 @@ npm install -g truffle
 npm install ganache --global
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+## Handy commands
+
+```
+npx truffle init
+```
+
+## File changes
+
+truffle-config.js
+
+```
+const path = require('path')
+
+module.exports = {
+  networks: {
+    development: {
+      host: '127.0.0.1',
+      port: 9545,
+      network_id: '*',
+    },
+  },
+  compilers: {
+    solc: {
+      version: '0.4.26',
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
+}
+```
 
 ## Running the tests
 
