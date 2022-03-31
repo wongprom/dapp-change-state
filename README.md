@@ -35,11 +35,59 @@ npm install -g truffle
 npm install ganache --global
 ```
 
+## Handy links
+
+- [https://trufflesuite.com/](https://trufflesuite.com/) - Sweet Tools for Smart Contracts.
+  The Truffle Suite gets developers from idea to dapp as comfortably as possible.
+
+- [https://github.com/trufflesuite/ganache](https://github.com/trufflesuite/ganache) - A tool for creating a local blockchain for fast Ethereum development.
+
 ## Handy commands
 
 ```
 npx truffle init
 ```
+
+```
+npx truffle develop
+```
+
+After running in `npx truffle develop` in terminal, displays 10 accounts with "Private Keys"
+![alt text](./images/npx-truffle-develop-terminal.png)
+
+```
+npx truffle develop --log
+```
+
+## Connect Metamask to port: 9545
+
+1. Click "My Accounts", top right corner with round icon
+
+![alt text](./images/metamask-click-account.png)
+
+2. Click "Settings"
+
+![alt text](./images/metamask-click-settings.png)
+
+3. Click "Network"
+
+![alt text](./images/metamask-click-networks.png)
+
+4. Click "Add Network"
+
+![alt text](./images/metamask-add-network.png)
+
+5. Fill form
+
+![alt text](./images/metamask-fill-info.png)
+
+6. Select the created network
+
+![alt text](./images/metamask-select-created-network.png)
+
+7. Metamask connected successfully
+
+![alt text](./images/metamask-connected.png)
 
 ## File changes
 
