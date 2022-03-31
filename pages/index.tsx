@@ -1,8 +1,21 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useRef } from 'react'
 
 const Home: NextPage = () => {
+  // const inputRef = useRef<HTMLInputElement["value"]>(0)
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  const handleSetBlockChainState = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if (inputRef.current?.value) {
+      //Set block chain state
+      console.log('inputRef.current?.value ', inputRef.current.value)
+      inputRef.current.value = ''
+    }
+  }
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -36,6 +49,8 @@ const Home: NextPage = () => {
                   Type a number
                 </label>
                 <input
+                  // value={inputRef}
+                  ref={inputRef}
                   type="number"
                   id="number-input"
                   name="number-input"
@@ -56,7 +71,10 @@ const Home: NextPage = () => {
                   className="w-full rounded border border-gray-600 bg-gray-600 bg-opacity-20 py-1 px-3 text-base leading-8 text-gray-100 outline-none transition-colors duration-200 ease-in-out focus:border-pink-500 focus:bg-transparent focus:ring-2 focus:ring-pink-900"
                 />
               </div> */}
-              <button className="rounded border-0 bg-pink-500 py-2 px-8 text-lg text-white hover:bg-pink-600 focus:outline-none">
+              <button
+                className="rounded border-0 bg-pink-500 py-2 px-8 text-lg text-white hover:bg-pink-600 focus:outline-none"
+                onClick={(e) => handleSetBlockChainState(e)}
+              >
                 Set State
               </button>
               <p className="mt-3 text-xs">Some fancy text</p>
