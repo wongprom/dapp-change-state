@@ -1,16 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { useRef } from 'react'
 
 const Home: NextPage = () => {
-  // const inputRef = useRef<HTMLInputElement["value"]>(0)
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const handleSetBlockChainState = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSetBlockchainState = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (inputRef.current?.value) {
-      //Set block chain state
+      //Set blockchain state
       console.log('inputRef.current?.value ', inputRef.current.value)
       inputRef.current.value = ''
     }
@@ -73,7 +71,7 @@ const Home: NextPage = () => {
               </div> */}
               <button
                 className="rounded border-0 bg-pink-500 py-2 px-8 text-lg text-white hover:bg-pink-600 focus:outline-none"
-                onClick={(e) => handleSetBlockChainState(e)}
+                onClick={(e) => handleSetBlockchainState(e)}
               >
                 Set State
               </button>
