@@ -9,7 +9,8 @@ declare let window: any
 
 //Truffle outputs post-migrations process
 const web3 = new Web3(Web3.givenProvider)
-const contractAddr = '0x9416E04B2f61BeA9DeFaA5a6653862cBA0CC5b33'
+const contractAddr = '0xfC9B69690ee8A15A2cB6d37Bf2019E317CBc84Cb'
+// @ts-ignore
 const ChangeState = new web3.eth.Contract(changeStateInput, contractAddr)
 
 const Home: NextPage = () => {
