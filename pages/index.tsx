@@ -1,15 +1,19 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import Web3 from 'web3'
 import { changeStateInput } from '../abi/abis'
 
+// TypScript
+declare let window: any
+
 //Truffle outputs post-migrations process
-// const web3 = new Web3(Web3.givenProvider)
-// const contractAddr = '0x0'
-// const ChangeState = new web3.eth.Contract(changeStateInput, contractAddr)
+const web3 = new Web3(Web3.givenProvider)
+const contractAddr = '0x9416E04B2f61BeA9DeFaA5a6653862cBA0CC5b33'
+const ChangeState = new web3.eth.Contract(changeStateInput, contractAddr)
 
 const Home: NextPage = () => {
+  const [blockchainData, setBlockchainData] = useState(null)
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   // check if a web3 instance is running on port:9545
@@ -21,18 +25,35 @@ const Home: NextPage = () => {
     .isListening()
     .then(() => console.log('connection is successful!'))
     .catch((e) => console.error('Something went wrong : ', e))
-  // read: and get data from our local blockchain
 
-  // write: send data to our local blockchain
-
-  const handleSetBlockchainState = (e: React.MouseEvent<HTMLButtonElement>) => {
+  // Read: and get data from our local blockchain
+  const handleGetBlockchainData = async (e: any) => {
     e.preventDefault()
-    if (inputRef.current?.value) {
-      //Set blockchain state
-      console.log('inputRef.current?.value ', inputRef.current.value)
-      inputRef.current.value = ''
-    }
+    const result = await ChangeState.methods.get().call()
+    // setBlockchainData(result)
+    console.log('result: ', result)
   }
+  // Write: send data to our local blockchain
+  const handleSet = async (e: any) => {
+    e.preventDefault()
+    const accounts = await window.ethereum.enable()
+    const account = accounts[0]
+    const gas = await ChangeState.methods.set(inputRef).estimateGas()
+    const result = await ChangeState.methods.set(inputRef).send({
+      from: account,
+      gas,
+    })
+    console.log(result)
+  }
+
+  // const handleSetBlockchainState = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault()
+  //   if (inputRef.current?.value) {
+  //     //Set blockchain state
+  //     console.log('inputRef.current?.value ', inputRef.current.value)
+  //     inputRef.current.value = ''
+  //   }
+  // }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
@@ -51,7 +72,10 @@ const Home: NextPage = () => {
               <p className="mt-4 mb-4 leading-relaxed">
                 Display state from block chain here
               </p>
-              <button className="rounded border-0 bg-pink-500 py-2 px-8 text-lg text-white hover:bg-pink-600 focus:outline-none">
+              <button
+                onClick={(e) => handleGetBlockchainData(e)}
+                className="rounded border-0 bg-pink-500 py-2 px-8 text-lg text-white hover:bg-pink-600 focus:outline-none"
+              >
                 Get state
               </button>
             </div>
@@ -91,7 +115,7 @@ const Home: NextPage = () => {
               </div> */}
               <button
                 className="rounded border-0 bg-pink-500 py-2 px-8 text-lg text-white hover:bg-pink-600 focus:outline-none"
-                onClick={(e) => handleSetBlockchainState(e)}
+                // onClick={(e) => handleSetBlockchainState(e)}
               >
                 Set State
               </button>
