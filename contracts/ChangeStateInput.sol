@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.26 <0.9.0;
 
-contract ChangStateInput {
+contract ChangeStateInput {
     // Variable
     uint256 stateInput;
 
