@@ -52,6 +52,10 @@ npx truffle init
 npx truffle develop
 ```
 
+```
+truffle migrate --reset --compile-all
+```
+
 After running in `npx truffle develop` in terminal, displays 10 accounts with "Private Keys"
 ![alt text](./images/npx-truffle-develop-terminal.png)
 
